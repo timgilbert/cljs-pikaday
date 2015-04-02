@@ -7,15 +7,22 @@
   (:require-macros [reagent.ratom :refer [reaction]]))
 
 ;; -------------------------
+;; Date stuff
+
+(defn- before [date days]
+  (js/Date. (.getFullYear date) (.getMonth date) (- (.getDate date) days)))
+
+(def today (js/Date.))
+(def yesterday (before today 1))
+(def last-week (before today 7))
+(def last-week-yesterday (before today 8))
+
+;; -------------------------
 ;; App state
 
-(defonce today (js/Date.))
-(defonce last-week 
-  (js/Date. (.getFullYear today) (.getMonth today) (- (.getDate today) 7)))
+(defonce start-date (atom last-week-yesterday))
 
-(defonce start-date (atom last-week))
-
-(defonce end-date (atom today))
+(defonce end-date (atom yesterday))
 
 ;; -------------------------
 ;; Views
