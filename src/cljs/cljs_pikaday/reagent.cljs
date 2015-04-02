@@ -14,18 +14,38 @@
 
 (defn date-selector
   ""
-  [pikaday-attrs input-attrs]
+  [{:keys [date-atom max-date-atom pikaday-attrs input-attrs]}]
   (let []
     (reagent/create-class
       {:component-did-mount
         (fn [this]
-          (let [dom-node (.getDOMNode this)
-                opts (opts-transform (merge {:field dom-node} pikaday-attrs))
+          (let [default-opts
+                {:field (.getDOMNode this)
+                 :default-date @date-atom
+                 :set-default-date true
+                 :on-select #(reset! date-atom %)}
+                opts (opts-transform (merge default-opts pikaday-attrs))
                 instance (js/Pikaday. opts)]
+            (when date-atom
+              (add-watch date-atom :update-instance
+                (fn [key ref old new]
+                  (console/log ":update-instance" old new @date-atom)
+                  (console/log "=" (= new @date-atom))
+                  (when (not= @date-atom new)
+                    (.setDate instance new)))))
+            (when max-date-atom
+              (add-watch max-date-atom :update-max-date 
+                (fn [key ref old new]
+                  ;(console/log "watch max" key ref old new)
+                  (.setMaxDate instance new)
+                  ; If new max date is less than selected date, reset actual date to max
+                  (if (> @date-atom new)
+                    (reset! date-atom new)
+                    (.setDate instance new)))))
             (console/warn "opts:" opts)
             (console/warn "mounted:" instance)))
        :display-name "pikaday-component"
        :reagent-render
         (fn [input-attrs]
-          (console/log "render")
+          ;(console/log "render")
           [:input input-attrs])})))

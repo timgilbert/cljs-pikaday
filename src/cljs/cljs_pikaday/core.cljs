@@ -13,17 +13,18 @@
 (defonce last-week 
   (js/Date. (.getFullYear today) (.getMonth today) (- (.getDate today) 7)))
 
-(defonce state (atom {:dates {:start last-week :end today}}))
+(defonce start-date (atom last-week))
+
+(defonce end-date (atom today))
 
 ;; -------------------------
 ;; Views
 
 (defn set-date! [which date]
-  (console/log "Resetting date" (str which) "to" date)
-  (swap! state assoc-in [:date which] date))
+  (reset! (get {:start start-date :end end-date} which) date))
 
 (defn get-date! [which]
-  (let [js-date (get-in @state [:date which])]
+  (let [js-date @(get {:start start-date :end end-date} which)]
     (console/log "js-date" js-date)
     (if (= (type js-date) js/Date)
       (.toLocaleDateString js-date "en" "%d-%b-%Y")
@@ -34,15 +35,16 @@
     [:div 
       [:label {:for "start"} "Start date: "]
       [pikaday/date-selector 
-        {:on-select #(set-date! :start %)
-         :max-date (js/Date.)}
-        {:id "start"}]]
+        {:date-atom start-date
+         :max-date-atom end-date
+         :pikaday-attrs {:max-date today}
+         :input-attrs {:id "start"}}]]
     [:div 
       [:label {:for "end"} "End date: "]
       [pikaday/date-selector 
-        {:on-select #(set-date! :end %)
-         :max-date (js/Date.)}
-        {:id "end"}]]
+        {:date-atom end-date
+         :pikaday-attrs {:max-date today}
+         :input-attrs {:id "end"}}]]
     [:div
       [:p "Your selected range: " (get-date! :start) " to " (get-date! :end)]
       [:p [:button {:on-click #(set-date! :start today)} "Start today"]
