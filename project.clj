@@ -21,6 +21,7 @@
                  [environ "1.0.0"]
                  [secretary "1.2.2"]
                  [cljsjs/pikaday "1.3.2-0"]
+                 [camel-snake-kebab "0.3.1"]
                  [shodan "0.4.1"]]
 
   :plugins [[lein-cljsbuild "1.0.4"]

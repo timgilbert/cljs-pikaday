@@ -8,38 +8,46 @@
 
 ;; -------------------------
 ;; App state
-(def state (atom {:date nil}))
+
+(defonce today (js/Date.))
+(defonce last-week 
+  (js/Date. (.getFullYear today) (.getMonth today) (- (.getDate today) 7)))
+
+(defonce state (atom {:dates {:start last-week :end today}}))
 
 ;; -------------------------
 ;; Views
 
-(defn set-date! [date]
-  (console/log "Resetting date to" date)
-  (swap! state assoc-in [:date] date))
+(defn set-date! [which date]
+  (console/log "Resetting date" (str which) "to" date)
+  (swap! state assoc-in [:date which] date))
 
-(defn get-date! []
-  (let [js-date (:date @state)]
+(defn get-date! [which]
+  (let [js-date (get-in @state [:date which])]
     (console/log "js-date" js-date)
     (if (= (type js-date) js/Date)
       (.toLocaleDateString js-date "en" "%d-%b-%Y")
       "unselected")))
 
-(defn last-week []
-  (let [today (js/Date.)]
-    (js/Date. (.getFullYear today) (.getMonth today) (- (.getDate today) 7))))
-
-(defn onselect [& args]
-  (set-date! (first args)))
-
 (defn home-page []
   [:div [:h2 "Welcome to cljs-pikaday"]
     [:div 
-      [pikaday/selector {:onSelect set-date!}]]
+      [:label {:for "start"} "Start date: "]
+      [pikaday/date-selector 
+        {:on-select #(set-date! :start %)
+         :max-date (js/Date.)}
+        {:id "start"}]]
+    [:div 
+      [:label {:for "end"} "End date: "]
+      [pikaday/date-selector 
+        {:on-select #(set-date! :end %)
+         :max-date (js/Date.)}
+        {:id "end"}]]
     [:div
-      [:p "Your selected date: " (get-date!) "."]
-      [:p [:button {:on-click #(set-date! (js/Date.))} "Today"]
-      [:p [:button {:on-click #(set-date! (last-week))} "Last week"]
-      [:p [:button {:on-click #(set-date! nil)} "Unset"]]]]]])
+      [:p "Your selected range: " (get-date! :start) " to " (get-date! :end)]
+      [:p [:button {:on-click #(set-date! :start today)} "Start today"]
+      [:p [:button {:on-click #(set-date! :start last-week)} "Start last week"]
+      [:p [:button {:on-click #(set-date! :start nil)} "Unset"]]]]]])
 
 ;; -------------------------
 ;; Initialize app
