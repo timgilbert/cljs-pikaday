@@ -1,4 +1,4 @@
-(ns cljs-pikaday.core
+(ns cljs-pikaday-reagent-example.core
     (:require [reagent.core :as reagent]
               [reagent.session :as session]
               [shodan.console :as console :include-macros true]

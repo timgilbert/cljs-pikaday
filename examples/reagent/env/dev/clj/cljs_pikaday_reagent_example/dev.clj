@@ -1,4 +1,4 @@
-(ns cljs-pikaday.dev
+(ns cljs-pikaday-reagent-example.dev
   (:require [cemerick.piggieback :as piggieback]
             [weasel.repl.websocket :as weasel]
             [leiningen.core.main :as lein]))

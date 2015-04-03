@@ -1,4 +1,4 @@
-(ns cljs-pikaday.handler
+(ns cljs-pikaday-reagent-example.handler
   (:require [compojure.core :refer [GET defroutes]]
             [compojure.route :refer [not-found resources]]
             [ring.middleware.defaults :refer [site-defaults wrap-defaults]]

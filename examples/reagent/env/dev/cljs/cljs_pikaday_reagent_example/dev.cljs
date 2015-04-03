@@ -1,5 +1,5 @@
-(ns ^:figwheel-no-load cljs-pikaday.dev
-  (:require [cljs-pikaday.core :as core]
+(ns ^:figwheel-no-load cljs-pikaday-reagent-example.dev
+  (:require [cljs-pikaday-reagent-example.core :as core]
             [figwheel.client :as figwheel :include-macros true]
             [weasel.repl :as weasel]
             [reagent.core :as r]))

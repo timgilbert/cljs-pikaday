@@ -1,5 +1,5 @@
-(ns cljs-pikaday.server
-  (:require [cljs-pikaday.handler :refer [app]]
+(ns cljs-pikaday-reagent-example.server
+  (:require [cljs-pikaday-reagent-example.handler :refer [app]]
             [ring.adapter.jetty :refer [run-jetty]])
   (:gen-class))
 

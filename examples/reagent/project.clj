@@ -1,8 +1,8 @@
-(defproject cljs-pikaday "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
+(defproject cljs-pikaday-reagent-example "0.1.0-SNAPSHOT"
+  :description "reagent example project for cljs-pikaday"
   :url "http://example.com/FIXME"
-  :license {:name "Eclipse Public License"
-            :url "http://www.eclipse.org/legal/epl-v10.html"}
+  :license {:name "MIT"
+            :url "https://github.com/timgilbert/cljs-pikaday"}
 
   :source-paths ["src/clj" "../../src/cljs" "src/cljs"]
 
@@ -29,14 +29,14 @@
             [lein-ring "0.9.1"]
             [lein-asset-minifier "0.2.2"]]
 
-  :ring {:handler cljs-pikaday.handler/app
-         :uberwar-name "cljs-pikaday.war"}
+  :ring {:handler cljs-pikaday-reagent-example.handler/app
+         :uberwar-name "cljs-pikaday-reagent-example.war"}
 
   :min-lein-version "2.5.0"
 
-  :uberjar-name "cljs-pikaday.jar"
+  :uberjar-name "cljs-pikaday-reagent-example.jar"
 
-  :main cljs-pikaday.server
+  :main cljs-pikaday-reagent-example.server
 
   :clean-targets ^{:protect false} ["resources/public/js"]
 
@@ -44,14 +44,14 @@
   {:assets
     {"resources/public/css/site.min.css" "resources/public/css/site.css"}}
 
-  :cljsbuild {:builds {:app {:source-paths ["src/cljs"]
+  :cljsbuild {:builds {:app {:source-paths ["src/cljs" "../../src/cljs"]
                              :compiler {:output-to     "resources/public/js/app.js"
                                         :output-dir    "resources/public/js/out"
                                         :asset-path   "js/out"
                                         :optimizations :none
                                         :pretty-print  true}}}}
 
-  :profiles {:dev {:repl-options {:init-ns cljs-pikaday.repl
+  :profiles {:dev {:repl-options {:init-ns cljs-pikaday-reagent-example.repl
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
 
                    :dependencies [[ring-mock "0.1.5"]
@@ -72,12 +72,12 @@
                    :figwheel {:http-server-root "public"
                               :server-port 3449
                               :css-dirs ["resources/public/css"]
-                              :ring-handler cljs-pikaday.handler/app}
+                              :ring-handler cljs-pikaday-reagent-example.handler/app}
 
                    :env {:dev? true}
 
                    :cljsbuild {:builds {:app {:source-paths ["env/dev/cljs"]
-                                              :compiler {:main "cljs-pikaday.dev"
+                                              :compiler {:main "cljs-pikaday-reagent-example.dev"
                                                          :source-map true}}
 }
 }}

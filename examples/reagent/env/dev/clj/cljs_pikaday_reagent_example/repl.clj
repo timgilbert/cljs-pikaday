@@ -1,6 +1,6 @@
-(ns cljs-pikaday.repl
-  (:use cljs-pikaday.handler
-        cljs-pikaday.dev
+(ns cljs-pikaday-reagent-example.repl
+  (:use cljs-pikaday-reagent-example.handler
+        cljs-pikaday-reagent-example.dev
         ring.server.standalone
         [ring.middleware file-info file]))
 
