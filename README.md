@@ -44,6 +44,14 @@ field, the atom passed in to the `:date-atom` property will be
 There is [an example reagent project](examples/reagent/) which demonstrates 
 some additional functionality.
 
+## CSS
+
+Pikaday comes with its own CSS file, which is autoloadable through various 
+javascript packaging tools. If an interface to these exists in ClojureScript 
+I can't find it, so as a workaround it's probably easiest to simplly download 
+the [pikaday.css file from github](https://github.com/dbushell/Pikaday/blob/master/css/pikaday.css)
+and reference it in your HTML.
+
 ## TODO
 
 * document min/max date atoms
