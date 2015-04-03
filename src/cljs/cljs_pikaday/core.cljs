@@ -28,11 +28,11 @@
 ;; Views
 
 (defn set-date! [which date]
-  (reset! (get {:start start-date :end end-date} which) date))
+  "Set a date. which is either :start or :end."
+  (reset! (which {:start start-date :end end-date}) date))
 
 (defn get-date! [which]
-  (let [js-date @(get {:start start-date :end end-date} which)]
-    (console/log "js-date" js-date)
+  (let [js-date @(which {:start start-date :end end-date})]
     (if (= (type js-date) js/Date)
       (.toLocaleDateString js-date "en" "%d-%b-%Y")
       "unselected")))
@@ -50,6 +50,7 @@
       [:label {:for "end"} "End date: "]
       [pikaday/date-selector 
         {:date-atom end-date
+         :min-date-atom start-date
          :pikaday-attrs {:max-date today}
          :input-attrs {:id "end"}}]]
     [:div
