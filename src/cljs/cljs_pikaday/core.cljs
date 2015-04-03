@@ -1,5 +1,5 @@
 (ns cljs-pikaday.core
-    (:require [reagent.core :as reagent :refer [atom]]
+    (:require [reagent.core :as reagent]
               [reagent.session :as session]
               [shodan.console :as console :include-macros true]
               [secretary.core :as secretary :include-macros true]
@@ -10,7 +10,19 @@
 ;; Date stuff
 
 (defn- before [date days]
+  "Return a new js/Date which is the given number of days before the given date"
   (js/Date. (.getFullYear date) (.getMonth date) (- (.getDate date) days)))
+
+(defn date? [x]
+  (= (type x) js/Date))
+
+(defn days-between [x y]
+  "Return the number of days between the two js/Date instances"
+  (when (every? date? [x y])
+    (let [ms-per-day (* 1000 60 60 25)
+          x-ms (.getTime x)
+          y-ms (.getTime y)]
+      (.round js/Math (.abs js/Math (/ (- x-ms y-ms) ms-per-day))))))
 
 (def today (js/Date.))
 (def yesterday (before today 1))
@@ -20,9 +32,11 @@
 ;; -------------------------
 ;; App state
 
-(defonce start-date (atom last-week-yesterday))
+(defonce start-date (reagent/atom last-week-yesterday))
 
-(defonce end-date (atom yesterday))
+(defonce end-date (reagent/atom yesterday))
+
+(def total-days-selected (reaction (days-between @start-date @end-date)))
 
 ;; -------------------------
 ;; Views
@@ -33,12 +47,12 @@
 
 (defn get-date! [which]
   (let [js-date @(which {:start start-date :end end-date})]
-    (if (= (type js-date) js/Date)
+    (if (date? js-date)
       (.toLocaleDateString js-date "en" "%d-%b-%Y")
       "unselected")))
 
 (defn home-page []
-  [:div [:h2 "Welcome to cljs-pikaday"]
+  [:div [:h2 "Select a start and end date"]
     [:div 
       [:label {:for "start"} "Start date: "]
       [pikaday/date-selector 
@@ -55,9 +69,10 @@
          :input-attrs {:id "end"}}]]
     [:div
       [:p "Your selected range: " (get-date! :start) " to " (get-date! :end)]
+      [:p "Days selected: " @total-days-selected]
       [:p [:button {:on-click #(set-date! :start today)} "Start today"]
       [:p [:button {:on-click #(set-date! :start last-week)} "Start last week"]
-      [:p [:button {:on-click #(set-date! :start nil)} "Unset"]]]]]])
+      [:p [:button {:on-click #(do (set-date! :start nil) (set-date! :end nil))} "Unset both"]]]]]])
 
 ;; -------------------------
 ;; Initialize app
