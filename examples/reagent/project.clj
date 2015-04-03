@@ -51,7 +51,7 @@
                                         :asset-path    "js/out"
                                         :optimizations :none
                                         :pretty-print  true}}
-                        :prod {:source-paths ["env/prod/cljs"]
+                        :prod {:source-paths ["env/prod/cljs" "../../src"]
                                :compiler {:output-to     "resources/public/js/app.js"
                                           :optimizations :advanced
                                           :pretty-print  false}}}}

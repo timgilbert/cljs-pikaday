@@ -16,4 +16,4 @@ to dynamically set the minimum and maximum dates available for each range
 past).
 
 You can see this in action at 
-http://timgilbert.github.io/cljs-pikaday/reagent-example/index.html.
+http://timgilbert.github.io/cljs-pikaday/reagent-example/.
