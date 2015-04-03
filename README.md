@@ -1,6 +1,6 @@
 # cljs-pikaday
 
-cljs-pikaday is intended to provide a native ClojureScript interface to the 
+`cljs-pikaday` is intended to provide a native ClojureScript interface to the 
 [Pikaday](https://github.com/dbushell/Pikaday) JavaScript date picker, intended 
 for use in the various ClojureScript react frameworks.
 
@@ -11,7 +11,7 @@ The implementation currently works for
 
 `cljs-pikaday` currently uses plain JavaScript `Date` objects for 
 its values - I'd like to have it able to use cljs-time and/or 
-moment at some point.
+moment at some point, because ugh, JavaScript `Date` objects.
 
 ## reagent interface
 

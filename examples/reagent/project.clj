@@ -1,8 +1,8 @@
 (defproject cljs-pikaday-reagent-example "0.1.0-SNAPSHOT"
   :description "reagent example project for cljs-pikaday"
-  :url "http://example.com/FIXME"
+  :url "https://github.com/timgilbert/cljs-pikaday"
   :license {:name "MIT"
-            :url "https://github.com/timgilbert/cljs-pikaday"}
+            :url "http://opensource.org/licenses/MIT"}
 
   :source-paths ["src/clj" "../../src/cljs" "src/cljs"]
 
@@ -45,7 +45,7 @@
     {"resources/public/css/site.min.css" ["resources/public/css/site.css"
                                           "resources/public/css/pikaday.css"]}}
 
-  :cljsbuild {:builds {:app {:source-paths ["src/cljs" "../../src/cljs"]
+  :cljsbuild {:builds {:app {:source-paths ["src/cljs" "../../src"]
                              :compiler {:output-to     "resources/public/js/app.js"
                                         :output-dir    "resources/public/js/out"
                                         :asset-path    "js/out"
