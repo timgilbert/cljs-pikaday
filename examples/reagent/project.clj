@@ -4,7 +4,7 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
-  :source-paths ["src/clj" "src/cljs"]
+  :source-paths ["src/clj" "../../src/cljs" "src/cljs"]
 
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [ring-server "0.4.0"]
