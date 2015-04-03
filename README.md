@@ -15,11 +15,7 @@ moment at some point, because ugh, JavaScript `Date` objects.
 
 ## Installation
 
-Add cljs-pikaday to your project's `:dependencies` vector:
-
-```clojurescript
-    [cljs-pikaday "0.1.0"]
-```
+Add `[cljs-pikaday "0.1.0"]` to your project's `:dependencies` vector:
 
 [![Clojars Project](http://clojars.org/cljs-pikaday/latest-version.svg)](http://clojars.org/cljs-pikaday)
 
@@ -27,9 +23,13 @@ Add cljs-pikaday to your project's `:dependencies` vector:
 
 The reagent implementation accepts an ratom 
 (or [reaction](https://github.com/Day8/re-frame#how-flow-happens-in-reagent))
-as its input, and `reset!`s it whenever the selected date changes.
+as its input. When the user selects a new date, the component will update 
+the atom, and if the atom is updated elsewhere, the date-picker will display 
+the new date.
 
-The simplest way to use it would be something like this:
+There is a more fleshed-out example in the 
+[examples/reagent directory](examples/reagent/), but the simplest way to use
+it would be something like this:
 
 ```clojure
 (ns cljs-pikaday.core
@@ -47,7 +47,7 @@ The simplest way to use it would be something like this:
 
 `pikaday/date-selector` returns code for an `<input>` tag, and 
 sets up various reagent lifecycle methods to instantiate and bind 
-a `Piakaday` instance. When the user selects a new date in the input 
+a `Pikaday` instance. When the user selects a new date in the input 
 field, the atom passed in to the `:date-atom` property will be 
 `reset!` with its new value.
 
