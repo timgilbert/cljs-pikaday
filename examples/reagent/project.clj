@@ -21,7 +21,7 @@
                  [environ "1.0.0"]
                  [secretary "1.2.2"]
                  [cljsjs/pikaday "1.3.2-0"]
-                 [camel-snake-kebab "0.3.1"]
+                 [camel-snake-kebab "0.3.1" :exclusions [org.clojure/clojure]]
                  [shodan "0.4.1"]]
 
   :plugins [[lein-cljsbuild "1.0.4"]
@@ -42,14 +42,19 @@
 
   :minify-assets
   {:assets
-    {"resources/public/css/site.min.css" "resources/public/css/site.css"}}
+    {"resources/public/css/site.min.css" ["resources/public/css/site.css"
+                                          "resources/public/css/pikaday.css"]}}
 
   :cljsbuild {:builds {:app {:source-paths ["src/cljs" "../../src/cljs"]
                              :compiler {:output-to     "resources/public/js/app.js"
                                         :output-dir    "resources/public/js/out"
-                                        :asset-path   "js/out"
+                                        :asset-path    "js/out"
                                         :optimizations :none
-                                        :pretty-print  true}}}}
+                                        :pretty-print  true}}
+                        :prod {:source-paths ["env/prod/cljs"]
+                               :compiler {:output-to     "resources/public/js/app.js"
+                                          :optimizations :advanced
+                                          :pretty-print  false}}}}
 
   :profiles {:dev {:repl-options {:init-ns cljs-pikaday-reagent-example.repl
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
@@ -92,3 +97,7 @@
                                               :compiler
                                               {:optimizations :advanced
                                                :pretty-print false}}}}}})
+
+; Note to self: to compile for github pages, "lein cljsbuild once prod" and 
+; copy resources/public/js/app.js into gh-pages fork at reagent-example/js/app.js,
+; then "lein minify-assets" and copy resources/public/css/site.min.css over

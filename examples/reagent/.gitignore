@@ -11,3 +11,4 @@ pom.xml.asc
 /out
 /.repl
 figwheel_server.log
+/resources/public/css/site.min.css

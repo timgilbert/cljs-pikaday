@@ -15,5 +15,5 @@ to dynamically set the minimum and maximum dates available for each range
 (so you can't have a trip which starts in the future and extends into the 
 past).
 
-You can see this in action (eventually) at 
+You can see this in action at 
 http://timgilbert.github.io/cljs-pikaday/reagent-example/index.html.
