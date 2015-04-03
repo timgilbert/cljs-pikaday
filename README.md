@@ -13,6 +13,16 @@ The implementation currently works for
 its values - I'd like to have it able to use cljs-time and/or 
 moment at some point, because ugh, JavaScript `Date` objects.
 
+## Installation
+
+Add cljs-pikaday to your project's `:dependencies` vector:
+
+```clojurescript
+    [cljs-pikaday "0.1.0"]
+```
+
+[![Clojars Project](http://clojars.org/cljs-pikaday/latest-version.svg)](http://clojars.org/cljs-pikaday)
+
 ## reagent interface
 
 The reagent implementation accepts an ratom 
@@ -55,5 +65,5 @@ and reference it in your HTML.
 ## TODO
 
 * document min/max date atoms
-* Push to clojars
 * Om interface
+* tests(!)
