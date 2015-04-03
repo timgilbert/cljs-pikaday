@@ -9,6 +9,10 @@ The implementation currently works for
 [Om]() implementation soon, and maybe a nicer interface for 
 [re-frame](https://github.com/Day8/re-frame)).
 
+`cljs-pikaday` currently uses plain JavaScript `Date` objects for 
+its values - I'd like to have it able to use cljs-time and/or 
+moment at some point.
+
 ## reagent interface
 
 The reagent implementation accepts an ratom 
@@ -31,19 +35,17 @@ The simplest way to use it would be something like this:
 (reagent/render [home-page] (.getElementById js/document "app")))
 ```
 
-`pikaday/date-selector` returns hiccup for an `<input>` tag, and 
+`pikaday/date-selector` returns code for an `<input>` tag, and 
 sets up various reagent lifecycle methods to instantiate and bind 
 a `Piakaday` instance. When the user selects a new date in the input 
 field, the atom passed in to the `:date-atom` property will be 
 `reset!` with its new value.
 
-`cljs-pikaday` currently uses plain JavaScript `Date` objects for 
-its values - I'd like to have it able to use cljs-time and/or 
-moment at some point.
+There is [an example reagent project](examples/reagent/) which demonstrates 
+some additional functionality.
 
 ## TODO
 
 * document min/max date atoms
-* Move example project to its own directory
 * Push to clojars
 * Om interface

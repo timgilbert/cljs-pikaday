@@ -6,7 +6,7 @@ This is a pretty simple project, created with
 To run it, run `lein figwheel` in this directory and open http://localhost:3449/
 in a browser.
 
-The [main code](https://github.com/timgilbert/cljs-pikaday/blob/master/examples/reagent/src/cljs/cljs_pikaday_reagent_example/core.cljs) 
+The [main code](src/cljs/cljs_pikaday_reagent_example/core.cljs) 
 creates two atoms which represent the start and end dates of a trip, and displays 
 the number of days in the trip.
 
