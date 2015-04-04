@@ -1,10 +1,10 @@
 (defproject cljs-pikaday-re-frame-example "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
-  :license {:name "Eclipse Public License"
-            :url "http://www.eclipse.org/legal/epl-v10.html"}
+  :description "reagent example project for cljs-pikaday"
+  :url "https://github.com/timgilbert/cljs-pikaday"
+  :license {:name "MIT"
+            :url "http://opensource.org/licenses/MIT"}
 
-  :source-paths ["src/clj" "src/cljs"]
+  :source-paths ["src/clj" "../../src" "src/cljs"]
 
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [ring-server "0.4.0"]
@@ -19,7 +19,10 @@
                  [compojure "1.3.3"]
                  [selmer "0.8.2"]
                  [environ "1.0.0"]
-                 [secretary "1.2.3"]]
+                 [secretary "1.2.3"]
+                 [cljsjs/pikaday "1.3.2-0"]
+                 [camel-snake-kebab "0.3.1" :exclusions [org.clojure/clojure]]
+                 [shodan "0.4.1"]]
 
   :plugins [[lein-cljsbuild "1.0.4"]
             [lein-environ "1.0.0"]
@@ -39,14 +42,19 @@
 
   :minify-assets
   {:assets
-    {"resources/public/css/site.min.css" "resources/public/css/site.css"}}
+    {"resources/public/css/site.min.css" ["resources/public/css/site.css"
+                                          "resources/public/css/pikaday.css"]}}
 
-  :cljsbuild {:builds {:app {:source-paths ["src/cljs"]
+  :cljsbuild {:builds {:app {:source-paths ["src/cljs" "../../src"]
                              :compiler {:output-to     "resources/public/js/app.js"
                                         :output-dir    "resources/public/js/out"
-                                        :asset-path   "js/out"
+                                        :asset-path    "js/out"
                                         :optimizations :none
-                                        :pretty-print  true}}}}
+                                        :pretty-print  true}}
+                        :prod {:source-paths ["env/prod/cljs" "../../src"]
+                               :compiler {:output-to     "resources/public/js/app.js"
+                                          :optimizations :advanced
+                                          :pretty-print  false}}}}
 
   :profiles {:dev {:repl-options {:init-ns cljs-pikaday-re-frame-example.repl
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}

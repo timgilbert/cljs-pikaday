@@ -4,7 +4,7 @@
   :license {:name "MIT"
             :url "http://opensource.org/licenses/MIT"}
 
-  :source-paths ["src/clj" "../../src/cljs" "src/cljs"]
+  :source-paths ["src/clj" "../../src" "src/cljs"]
 
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [ring-server "0.4.0"]
