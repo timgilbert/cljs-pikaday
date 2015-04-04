@@ -1,8 +1,6 @@
 (ns cljs-pikaday-reagent-example.core
     (:require [reagent.core :as reagent]
-              [reagent.session :as session]
               [shodan.console :as console :include-macros true]
-              [secretary.core :as secretary :include-macros true]
               [cljs-pikaday.reagent :as pikaday])
   (:require-macros [reagent.ratom :refer [reaction]]))
 
