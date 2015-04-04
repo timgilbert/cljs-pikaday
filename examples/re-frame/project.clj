@@ -19,7 +19,6 @@
                  [compojure "1.3.3"]
                  [selmer "0.8.2"]
                  [environ "1.0.0"]
-                 [secretary "1.2.3"]
                  [cljsjs/pikaday "1.3.2-0"]
                  [camel-snake-kebab "0.3.1" :exclusions [org.clojure/clojure]]
                  [shodan "0.4.1"]]
