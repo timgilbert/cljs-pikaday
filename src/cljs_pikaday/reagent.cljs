@@ -1,7 +1,5 @@
 (ns cljs-pikaday.reagent
     (:require [reagent.core :as reagent :refer [atom]]
-              [shodan.console :as console :include-macros true]
-              [shodan.inspection :refer [inspect]]
               [camel-snake-kebab.core :refer [->camelCaseString]]
               [camel-snake-kebab.extras :refer [transform-keys]]
               [cljsjs.pikaday]))
