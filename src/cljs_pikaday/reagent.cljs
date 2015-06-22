@@ -21,7 +21,7 @@
   pikaday-attrs: a map of options to be passed to the Pikaday constructor.
   input-attrs: a map of options to be used as <input> tag attributes."
   [{:keys [date-atom max-date-atom min-date-atom pikaday-attrs input-attrs]}]
-  (let []
+  (let [instance-atom (atom nil)]
     (reagent/create-class
       {:component-did-mount
         (fn [this]
@@ -32,6 +32,7 @@
                  :on-select #(when date-atom (reset! date-atom %))}
                 opts (opts-transform (merge default-opts pikaday-attrs))
                 instance (js/Pikaday. opts)]
+            (reset! instance-atom instance)
             ; This code could probably be neater
             (when date-atom
               (add-watch date-atom :update-instance
@@ -46,12 +47,19 @@
                   (if (< @date-atom new)
                     (reset! date-atom new)))))
             (when max-date-atom
-              (add-watch max-date-atom :update-max-date 
+              (add-watch max-date-atom :update-max-date
                 (fn [key ref old new]
                   (.setMaxDate instance new)
                   ; If new max date is less than selected date, reset actual date to max
                   (if (> @date-atom new)
                     (reset! date-atom new)))))))
+       :component-will-unmount
+       (fn [this]
+         (.destroy @instance-atom)
+         (remove-watch instance-atom :update-instance)
+         (remove-watch instance-atom :update-min-date)
+         (remove-watch instance-atom :update-max-date)
+         (reset! instance-atom nil))
        :display-name "pikaday-component"
        :reagent-render
         (fn [input-attrs]
