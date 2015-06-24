@@ -1,4 +1,4 @@
-(defproject cljs-pikaday "0.1.1"
+(defproject cljs-pikaday "0.1.2"
   :description "ClojureScript interface to the Pikaday JS date picker"
   :url "https://github.com/timgilbert/cljs-pikaday"
   :license {:name "MIT"
