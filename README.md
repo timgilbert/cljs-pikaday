@@ -15,7 +15,7 @@ moment at some point, because ugh, JavaScript `Date` objects.
 
 ## Installation
 
-Add `[cljs-pikaday "0.1.1"]` to your project's `:dependencies` vector:
+Add `[cljs-pikaday "0.1.2"]` to your project's `:dependencies` vector:
 
 [![Clojars Project](http://clojars.org/cljs-pikaday/latest-version.svg)](http://clojars.org/cljs-pikaday)
 
