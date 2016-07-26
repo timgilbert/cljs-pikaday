@@ -26,7 +26,7 @@
       {:component-did-mount
         (fn [this]
           (let [default-opts
-                {:field (.getDOMNode this)
+                {:field (js/ReactDOM.findDOMNode this)
                  :default-date @date-atom
                  :set-default-date true
                  :on-select #(when date-atom (reset! date-atom %))}
@@ -62,5 +62,5 @@
          (reset! instance-atom nil))
        :display-name "pikaday-component"
        :reagent-render
-        (fn [input-attrs]
-          [:input input-attrs])})))
+       (fn [props]
+         [:input (:input-attrs props)])})))
