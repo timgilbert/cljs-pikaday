@@ -68,11 +68,11 @@
          :pikaday-attrs {:max-date today}
          :input-attrs {:id "end"}}]]
     [:div
-      [:p "Your selected range: " (get-date! :start) " to " (get-date! :end)]
-      [:p "Days selected: " @total-days-selected]
-      [:p [:button {:on-click #(set-date! :start today)} "Start today"]
-      [:p [:button {:on-click #(set-date! :start last-week)} "Start last week"]
-      [:p [:button {:on-click #(do (set-date! :start nil) (set-date! :end nil))} "Unset both"]]]]]
+     [:p "Your selected range: " (get-date! :start) " to " (get-date! :end)]
+     [:p "Days selected: " @total-days-selected]
+     [:p [:button {:on-click #(set-date! :start today)} "Start today"]]
+     [:p [:button {:on-click #(set-date! :start last-week)} "Start last week"]]
+     [:p [:button {:on-click #(do (set-date! :start nil) (set-date! :end nil))} "Unset both"]]]
     [:div [:p "This is a demonstration page for the "
               [:a {:href "https://github.com/timgilbert/cljs-pikaday"} "cljs-pikaday"] " library."]]])
 
